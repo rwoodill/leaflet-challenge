@@ -1,9 +1,12 @@
 // Rachel Woodill 2023-11-27
 
-
 // Use this link to get the GeoJSON data.
 let url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
+
+// ----------------------------------------------------------------
+// Function to select the colour of the points based on the depth of the earthquake
+// ----------------------------------------------------------------
 function chooseColour(depth){
     if (depth > 90){
         return "red"
@@ -21,12 +24,20 @@ function chooseColour(depth){
         return "yellow"
     }
     else return "lightgreen"
-}
+} //end of function chooseColour
 
+
+// ----------------------------------------------------------------
+// Function to customize the radius of the circle based on the magnitude of the earthquake
+// ----------------------------------------------------------------
 function chooseRadius(magnitude){
     return magnitude * 50000;
-}
+} //end of function chooseRadius
 
+
+// ----------------------------------------------------------------
+// Function to create the features based on the earthquake data
+// ----------------------------------------------------------------
 function createFeatures (earthquakeData){
     let earthQuakeFeatures = earthquakeData.features;
 
@@ -49,8 +60,12 @@ function createFeatures (earthquakeData){
     let earthquakes = L.layerGroup(earthquakeMarkers); 
 
     createMap(earthquakes)
-}
+} //end of function createFeatures
 
+
+// ----------------------------------------------------------------
+// Function to create the map based on the earthquake layer
+// ----------------------------------------------------------------
 function createMap(earthquakes) {
     // Create the tile layer that will be the background of our map.
     let street = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -81,8 +96,12 @@ function createMap(earthquakes) {
     L.control.layers(baseMaps, overlayMaps, {
         collapsed: false
     }).addTo(myMap);
-}
+} //end of function createMap
 
+
+// ----------------------------------------------------------------
+// Use d3 to access the data from the url
+// ----------------------------------------------------------------
 d3.json(url).then(function(response){
     createFeatures(response);
 });  
