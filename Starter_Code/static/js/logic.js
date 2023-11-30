@@ -56,9 +56,9 @@ function createFeatures (earthquakeData){
             }).bindPopup(`<h3>Location: ${thisEQ.properties.place}</h3><hr><p>DateTime: ${new Date(thisEQ.properties.time)}</p><p>Magnitude: ${thisEQ.properties.mag}</p><p>Depth: ${thisEQ.geometry.coordinates[2]}</p>`)
         )
     }    
-    
+    // create a layer group using the marker data
     let earthquakes = L.layerGroup(earthquakeMarkers); 
-
+    // call the createMap function, passing it the layer group created above
     createMap(earthquakes)
 } //end of function createFeatures
 
@@ -80,7 +80,7 @@ function createMap(earthquakes) {
         "Topographic Map": topo
     };
 
-    // Create an overlayMaps object to hold the bikeStations layer.
+    // Create an overlayMaps object to hold the earthquakes layer.
     let overlayMaps = {
         "Earthquakes": earthquakes
     };
